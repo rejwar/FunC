@@ -1,0 +1,26 @@
+;; Basic Wallet Smart Contract
+global tvm_accept();
+
+int main() impure {
+    ;; Automatically accept inbound external messages
+    tvm_accept();
+
+    ;; Retrieve message sender and amount
+    int msg_sender = get_msg_sender();
+    int msg_value = get_msg_value();
+
+    ;; Example: Send funds to a specified address
+    int recipient = 0x123456789abcdef; ;; Replace with a real address
+    int amount = 1000000000; ;; 1 TON in nanocoins
+
+    ;; Send funds
+    send_raw_message(
+        build_msg(
+            recipient,
+            amount,
+            0  ;; No special flags
+        ),
+        0   ;; No special flags
+    );
+    return 0;
+}
